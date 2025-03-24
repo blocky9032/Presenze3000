@@ -12,6 +12,9 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body class="bg-gray-900 text-gray-100">
+  <!-- Popup Notifiche -->
+  <div id="popup" class="fixed top-4 right-4 z-50"></div>
+  
   <!-- Barra di Navigazione -->
   <header class="bg-gray-800 p-4 shadow-md">
     <div class="container mx-auto flex justify-between items-center">
@@ -19,37 +22,38 @@
         Presenze<span class="text-yellow-500 font-extrabold">3000</span>
       </h1>
       <nav>
-        <a href="register.html" class="mx-2 px-3 py-1 rounded hover:bg-gray-700 transition">Registra Presenza</a>
-        <a href="query.html" class="mx-2 px-3 py-1 rounded hover:bg-gray-700 transition">Visualizza Presenze</a>
+        <a href="query.html" class="mx-2 px-3 py-1 rounded hover:bg-gray-700 transition flex items-center">
+          <i class="fa-solid fa-eye mr-2"></i> Visualizza Presenze
+        </a>
       </nav>
     </div>
   </header>
 
+  <!-- Contenuto -->
   <div class="container mx-auto p-4">
-    <section id="registration" class="bg-gray-800 rounded-lg shadow-lg p-6 mt-6">
+    <section id="registration" class="bg-gray-800 rounded-lg shadow-lg p-6 mt-6 max-w-md mx-auto">
       <h2 class="text-2xl font-semibold mb-4"><i class="fa-solid fa-pen-to-square mr-2"></i>Registra la tua presenza</h2>
       <form id="registerForm" class="space-y-4">
         <div>
           <label for="email" class="block mb-1">Email Istituzionale:</label>
-          <input type="email" id="email" name="email" required class="w-full p-2 rounded bg-gray-700 border border-gray-600 focus:outline-none focus:ring-2 focus:ring-violet-500">
+          <input type="email" id="email" name="email" required class="w-full max-w-xs p-2 rounded bg-gray-700 border border-gray-600 focus:outline-none focus:ring-2 focus:ring-violet-500">
         </div>
         <div>
           <label for="nome" class="block mb-1">Nome:</label>
-          <input type="text" id="nome" name="nome" required class="w-full p-2 rounded bg-gray-700 border border-gray-600 focus:outline-none focus:ring-2 focus:ring-violet-500">
+          <input type="text" id="nome" name="nome" required class="w-full max-w-xs p-2 rounded bg-gray-700 border border-gray-600 focus:outline-none focus:ring-2 focus:ring-violet-500">
         </div>
         <div>
           <label for="cognome" class="block mb-1">Cognome:</label>
-          <input type="text" id="cognome" name="cognome" required class="w-full p-2 rounded bg-gray-700 border border-gray-600 focus:outline-none focus:ring-2 focus:ring-violet-500">
+          <input type="text" id="cognome" name="cognome" required class="w-full max-w-xs p-2 rounded bg-gray-700 border border-gray-600 focus:outline-none focus:ring-2 focus:ring-violet-500">
         </div>
         <div>
           <label for="classe" class="block mb-1">Classe:</label>
-          <input type="text" id="classe" name="classe" required class="w-full p-2 rounded bg-gray-700 border border-gray-600 focus:outline-none focus:ring-2 focus:ring-violet-500">
+          <input type="text" id="classe" name="classe" required class="w-full max-w-xs p-2 rounded bg-gray-700 border border-gray-600 focus:outline-none focus:ring-2 focus:ring-violet-500">
         </div>
         <button type="submit" class="w-full py-2 bg-violet-600 hover:bg-violet-700 rounded transition-all duration-300">
           <i class="fa-solid fa-paper-plane mr-2"></i>Invia
         </button>
       </form>
-      <p id="registerMessage" class="mt-4 text-center"></p>
     </section>
   </div>
   <script src="register.js"></script>

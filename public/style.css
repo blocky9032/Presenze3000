@@ -3,6 +3,29 @@ body {
   transition: background-color 0.5s, color 0.5s;
 }
 
+/* Popup Notifiche */
+.popup-message {
+  padding: 1rem 1.5rem;
+  border-radius: 0.375rem;
+  font-weight: 500;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+  animation: fadeIn 0.5s ease-in-out;
+}
+.popup-success {
+  background-color: #22c55e; /* green-500 */
+  color: #fff;
+}
+.popup-error {
+  background-color: #ef4444; /* red-500 */
+  color: #fff;
+}
+#popup {
+  position: fixed;
+  top: 1rem;
+  right: 1rem;
+  z-index: 100;
+}
+
 /* Barra di Navigazione */
 header {
   background-color: #1f2937; /* gray-800 */
@@ -16,12 +39,17 @@ nav a:hover {
   color: #fff;
 }
 
+/* Limitazione larghezza dei campi */
+form input {
+  max-width: 300px;
+}
+
 /* Sezioni principali */
 section {
   animation: fadeIn 0.5s ease-in-out;
 }
 
-/* Stile della tabella (per i risultati) */
+/* Stile della tabella per i risultati */
 table {
   width: 100%;
   border-collapse: collapse;

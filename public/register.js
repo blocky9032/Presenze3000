@@ -1,9 +1,27 @@
+function showPopup(message, type) {
+  const popup = document.getElementById('popup');
+  const div = document.createElement('div');
+  div.className = `popup-message ${type === 'success' ? 'popup-success' : 'popup-error'}`;
+  div.textContent = message;
+  popup.appendChild(div);
+  // Rimuove il popup dopo 5 secondi
+  setTimeout(() => {
+    div.remove();
+  }, 5000);
+}
+
 document.getElementById('registerForm').addEventListener('submit', async function(e) {
   e.preventDefault();
-  const email = document.getElementById('email').value;
-  const nome = document.getElementById('nome').value;
-  const cognome = document.getElementById('cognome').value;
-  const classe = document.getElementById('classe').value;
+  const email = document.getElementById('email').value.trim();
+  const nome = document.getElementById('nome').value.trim();
+  const cognome = document.getElementById('cognome').value.trim();
+  const classe = document.getElementById('classe').value.trim();
+
+  // Validazione: l'email deve terminare con "@itiangioy.org"
+  if (!email.endsWith('@itiangioy.org')) {
+    showPopup('L\'email deve terminare con @itiangioy.org', 'error');
+    return;
+  }
 
   const response = await fetch('/register', {
     method: 'POST',
@@ -11,9 +29,11 @@ document.getElementById('registerForm').addEventListener('submit', async functio
     body: JSON.stringify({ email, nome, cognome, classe })
   });
   const result = await response.json();
-  const messageEl = document.getElementById('registerMessage');
-  messageEl.textContent = result.message || result.error;
-  messageEl.classList.add('transition', 'duration-500', 'ease-in-out');
-  setTimeout(() => messageEl.classList.remove('transition', 'duration-500', 'ease-in-out'), 500);
-  document.getElementById('registerForm').reset();
+
+  if (result.error) {
+    showPopup(result.error, 'error');
+  } else {
+    showPopup(result.message, 'success');
+    document.getElementById('registerForm').reset();
+  }
 });

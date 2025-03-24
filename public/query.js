@@ -1,6 +1,6 @@
 document.getElementById('queryForm').addEventListener('submit', async function(e) {
   e.preventDefault();
-  const email = document.getElementById('queryEmail').value;
+  const email = document.getElementById('queryEmail').value.trim();
 
   const response = await fetch('/query', {
     method: 'POST',
