@@ -11,7 +11,7 @@ const supabase = createClient(supabaseUrl, supabaseKey);
 const app = express();
 const port = process.env.PORT || 3000;
 
-// Serve file statici dalla cartella 'public'
+// Serve i file statici dalla cartella 'public'
 app.use(express.static(path.join(__dirname, 'public')));
 
 // Configurazione di body-parser per le richieste POST
@@ -48,6 +48,49 @@ app.post('/query', async (req, res) => {
     return res.status(500).json({ error: error.message });
   }
   res.json({ data });
+});
+
+// Endpoint per cancellare uno o più record
+app.post('/delete', async (req, res) => {
+  const { ids } = req.body;
+  if (!ids || !Array.isArray(ids) || ids.length === 0) {
+    return res.status(400).json({ error: "Nessun ID fornito" });
+  }
+  const { data, error } = await supabase
+    .from('presenze')
+    .delete()
+    .in('id', ids);
+  if (error) {
+    return res.status(500).json({ error: error.message });
+  }
+  res.json({ message: "Record eliminati", data });
+});
+
+// Endpoint per aggiornare la data (created_at) di uno o più record
+app.put('/update', async (req, res) => {
+  const { ids, new_date } = req.body;
+  if (!ids || !Array.isArray(ids) || ids.length === 0 || !new_date) {
+    return res.status(400).json({ error: "Input non valido" });
+  }
+  // Controlla che la nuova data non sia già presente (confronto stringa)
+  const { data: conflict, error: conflictError } = await supabase
+    .from('presenze')
+    .select('*')
+    .eq('created_at', new_date);
+  if (conflictError) {
+    return res.status(500).json({ error: conflictError.message });
+  }
+  if (conflict && conflict.length > 0) {
+    return res.status(400).json({ error: "Impossibile continuare: data non valida poiché risulta già un'altra presenza nella data indicata" });
+  }
+  const { data, error } = await supabase
+    .from('presenze')
+    .update({ created_at: new_date })
+    .in('id', ids);
+  if (error) {
+    return res.status(500).json({ error: error.message });
+  }
+  res.json({ message: "Record aggiornati", data });
 });
 
 app.listen(port, () => {

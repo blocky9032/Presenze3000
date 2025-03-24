@@ -12,6 +12,9 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body class="bg-gray-900 text-gray-100">
+  <!-- Popup Notifiche -->
+  <div id="popup" class="fixed top-4 right-4 z-50"></div>
+  
   <!-- Barra di Navigazione -->
   <header class="bg-gray-800 p-4 shadow-md">
     <div class="container mx-auto flex justify-between items-center">
@@ -19,6 +22,7 @@
         Presenze<span class="text-yellow-500 font-extrabold">3000</span>
       </h1>
       <nav>
+        <!-- In questa pagina mostriamo solo il pulsante per registrare -->
         <a href="register.html" class="mx-2 px-3 py-1 rounded hover:bg-gray-700 transition flex items-center">
           <i class="fa-solid fa-pen-to-square mr-2"></i> Registra Presenza
         </a>
@@ -28,20 +32,49 @@
 
   <!-- Contenuto -->
   <div class="container mx-auto p-4">
-    <section id="query" class="bg-gray-800 rounded-lg shadow-lg p-6 mt-6 max-w-md mx-auto">
+    <!-- Form di query iniziale -->
+    <section id="queryFormSection" class="bg-gray-800 rounded-lg shadow-lg p-6 mt-6 max-w-md mx-auto">
       <h2 class="text-2xl font-semibold mb-4"><i class="fa-solid fa-magnifying-glass mr-2"></i>Visualizza le tue presenze</h2>
       <form id="queryForm" class="space-y-4">
         <div>
           <label for="queryEmail" class="block mb-1">Email Istituzionale:</label>
           <input type="email" id="queryEmail" name="queryEmail" required class="w-full max-w-xs p-2 rounded bg-gray-700 border border-gray-600 focus:outline-none focus:ring-2 focus:ring-violet-500">
         </div>
-        <button type="submit" class="w-full py-2 bg-violet-600 hover:bg-violet-700 rounded transition-all duration-300">
+        <button type="submit" class="w-full max-w-xs py-2 bg-violet-600 hover:bg-violet-700 rounded transition-all duration-300">
           <i class="fa-solid fa-search mr-2"></i>Cerca
         </button>
       </form>
-      <div id="results" class="mt-6 overflow-x-auto"></div>
+    </section>
+
+    <!-- Sezione tabella (inizialmente nascosta) -->
+    <section id="resultsSection" class="mt-6 hidden">
+      <!-- Combobox per azioni multi-record -->
+      <div class="flex items-center mb-4">
+        <select id="actionSelect" class="p-2 rounded bg-gray-700 border border-gray-600 focus:outline-none focus:ring-2 focus:ring-violet-500">
+          <option value="">-- Seleziona azione --</option>
+          <option value="delete">Cancella presenza</option>
+          <option value="update">Modifica data</option>
+        </select>
+        <button id="applyAction" class="ml-4 px-4 py-2 bg-violet-600 hover:bg-violet-700 rounded transition-all duration-300">Esegui</button>
+      </div>
+      <div id="tableContainer"></div>
     </section>
   </div>
+
+  <!-- Popup per modifica data -->
+  <div id="updatePopup" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 hidden">
+    <div class="bg-gray-800 p-6 rounded-lg relative">
+      <h3 class="text-xl font-bold mb-2">Inserisci la nuova data e ora della seguente presenza</h3>
+      <!-- Messaggio di errore (nascosto inizialmente) -->
+      <div id="updateError" class="mb-2 text-red-400 hidden">Impossibile continuare: data non valida poiché risulta già un'altra presenza nella data indicata</div>
+      <input type="datetime-local" id="newDateTime" class="w-full p-2 rounded bg-gray-700 border border-gray-600 focus:outline-none focus:ring-2 focus:ring-violet-500">
+      <div class="mt-4 flex justify-end">
+        <button id="cancelUpdate" class="mr-4 px-4 py-2 bg-gray-600 hover:bg-gray-500 rounded">Annulla</button>
+        <button id="confirmUpdate" class="px-4 py-2 bg-violet-600 hover:bg-violet-700 rounded">Conferma</button>
+      </div>
+    </div>
+  </div>
+
   <script src="query.js"></script>
 </body>
 </html>

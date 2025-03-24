@@ -4,7 +4,6 @@ function showPopup(message, type) {
   div.className = `popup-message ${type === 'success' ? 'popup-success' : 'popup-error'}`;
   div.textContent = message;
   popup.appendChild(div);
-  // Rimuove il popup dopo 5 secondi
   setTimeout(() => {
     div.remove();
   }, 5000);
@@ -17,7 +16,6 @@ document.getElementById('registerForm').addEventListener('submit', async functio
   const cognome = document.getElementById('cognome').value.trim();
   const classe = document.getElementById('classe').value.trim();
 
-  // Validazione: l'email deve terminare con "@itiangioy.org"
   if (!email.endsWith('@itiangioy.org')) {
     showPopup('L\'email deve terminare con @itiangioy.org', 'error');
     return;
