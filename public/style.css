@@ -1,0 +1,54 @@
+/* Transizioni globali */
+body {
+  transition: background-color 0.5s, color 0.5s;
+}
+
+/* Barra di Navigazione */
+header {
+  background-color: #1f2937; /* gray-800 */
+}
+nav a {
+  color: #d1d5db; /* gray-300 */
+  font-size: 1rem;
+  font-weight: 500;
+}
+nav a:hover {
+  color: #fff;
+}
+
+/* Sezioni principali */
+section {
+  animation: fadeIn 0.5s ease-in-out;
+}
+
+/* Stile della tabella (per i risultati) */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 1rem;
+  animation: fadeIn 0.5s ease-in-out;
+}
+th, td {
+  padding: 0.75rem;
+  border: 1px solid #4a5568;
+  text-align: center;
+}
+th {
+  background-color: #2d3748;
+}
+tr:nth-child(even) {
+  background-color: #1a202c;
+}
+
+/* Animazione fadeIn */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Responsive per mobile */
+@media (max-width: 640px) {
+  .container {
+    padding: 1rem;
+  }
+}
