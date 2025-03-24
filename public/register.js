@@ -35,3 +35,21 @@ document.getElementById('registerForm').addEventListener('submit', async functio
     document.getElementById('registerForm').reset();
   }
 });
+
+const deleteAllBtn = document.getElementById('deleteAllBtn');
+if (deleteAllBtn) {
+  deleteAllBtn.addEventListener('click', async () => {
+    if (confirm("Sei sicuro di voler cancellare tutto il database?")) {
+      const response = await fetch('/deleteAll', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' }
+      });
+      const result = await response.json();
+      if (result.error) {
+        showPopup(result.error, 'error');
+      } else {
+        showPopup(result.message, 'success');
+      }
+    }
+  });
+}

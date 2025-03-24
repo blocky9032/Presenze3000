@@ -42,7 +42,7 @@ nav a:hover {
 /* Limitazione larghezza dei campi e pulsanti nel form */
 form input,
 form button {
-  max-width: 300px;
+  max-width: 500px;
 }
 
 /* Sezioni e tabella */

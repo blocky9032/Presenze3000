@@ -18,17 +18,26 @@
   <!-- Barra di Navigazione -->
   <header class="bg-gray-800 p-4 shadow-md">
     <div class="container mx-auto flex justify-between items-center">
-      <h1 class="text-2xl font-bold">
-        Presenze<span class="text-yellow-500 font-extrabold">3000</span>
-      </h1>
-      <nav>
-        <!-- In questa pagina mostriamo solo il pulsante per registrare -->
-        <a href="register.html" class="mx-2 px-3 py-1 rounded hover:bg-gray-700 transition flex items-center">
-          <i class="fa-solid fa-pen-to-square mr-2"></i> Registra Presenza
-        </a>
-      </nav>
+      <!-- Sinistra: Titolo -->
+      <div class="flex-1">
+        <h1 class="text-2xl font-bold">Presenze<span class="text-yellow-500 font-extrabold">3000</span></h1>
+      </div>
+      <!-- Centro: Pulsante Cancella tutto il database -->
+      <div class="flex-1 text-center">
+        <button id="deleteAllBtn" class="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded transition-all duration-300">
+          Cancella tutto il database
+        </button>
+      </div>
+      <!-- Destra: Navigazione -->
+      <div class="flex-1 text-right">
+        <nav>
+          <a href="register.html" class="mx-2 px-3 py-1 rounded hover:bg-gray-700 transition flex items-center">
+            <i class="fa-solid fa-pen-to-square mr-2"></i> Registra Presenza
+          </a>
+        </nav>
+      </div>
     </div>
-  </header>
+  </header>  
 
   <!-- Contenuto -->
   <div class="container mx-auto p-4">

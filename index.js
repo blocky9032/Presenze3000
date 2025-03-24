@@ -66,6 +66,18 @@ app.post('/delete', async (req, res) => {
   res.json({ message: "Record eliminati", data });
 });
 
+// Endpoint per cancellare tutti i record dal database
+app.post('/deleteAll', async (req, res) => {
+  const { data, error } = await supabase
+    .from('presenze')
+    .delete()
+    .neq('id', null); // cancella tutti i record
+  if (error) {
+    return res.status(500).json({ error: error.message });
+  }
+  res.json({ message: "Tutti i record sono stati eliminati", data });
+});
+
 // Endpoint per aggiornare la data (created_at) di uno o più record
 app.put('/update', async (req, res) => {
   const { ids, new_date } = req.body;
